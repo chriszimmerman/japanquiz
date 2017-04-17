@@ -2,6 +2,16 @@
   text-align: center;
 }
 
+.Answer {
+  background-color: #F52;
+  height: 20px;
+  width: 150px;
+  color: white;
+  padding: 20px;
+  margin: 5px;
+  display: inline-block;
+}
+
 .Quiz-header {
   background-color: #F52;
   height: 100px;

@@ -4,7 +4,7 @@
 
 .Answer {
   background-color: #F52;
-  height: 20px;
+  height: 15px;
   width: 150px;
   color: white;
   padding: 20px;
@@ -12,11 +12,19 @@
   display: inline-block;
 }
 
+.Answer:hover {
+  background-color: #00F;
+}
+
 .Quiz-header {
   background-color: #F52;
   height: 100px;
   padding: 20px;
   color: white;
+}
+
+.Correct-answer {
+  background-color: #052;
 }
 
 .Question {

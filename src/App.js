@@ -47,10 +47,8 @@ class App extends Component {
 
 class Question extends Component {
   render() {
-    var answers = this.props.answers.map((answer) =>
-      <div key={answer.english} className="Answer">
-        {answer.english}
-      </div>
+    var answers = this.props.answers.map((answer, i) =>
+      <Answer key={i} answer={answer} />
     );
     return (
       <div className="Quiz-header">
@@ -60,6 +58,20 @@ class Question extends Component {
         <ul>
           {answers}
         </ul>
+      </div>
+    );
+  }
+}
+
+class Answer extends Component {
+  handleClick() {
+    console.log('clicked')
+  }
+
+  render() {
+    return (
+      <div onClick={this.handleClick} className="Answer">
+        {this.props.answer.english}
       </div>
     );
   }

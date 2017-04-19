@@ -46,26 +46,45 @@ class App extends Component {
 }
 
 class Question extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { isToggleOn: true, questionClass: 'Neutral' };
+    this.handleAnswerSelected = this.handleAnswerSelected.bind(this);
+  }
+
+  handleAnswerSelected(answer) {
+    if(answer === this.props.question.english){
+      this.setState({ questionClass: 'Correct' })
+    }
+    else {
+      this.setState({ questionClass: 'Incorrect' })
+    }
+  }
+
   render() {
     var answers = this.props.answers.map((answer, i) =>
-      <Answer key={i} answer={answer} />
+      <Answer onAnswerSelected={this.handleAnswerSelected} key={i} answer={answer} />
     );
     return (
-      <div className="Quiz-header">
+      <div className={"Quiz-header " + this.state.questionClass}>
         <div className="Question">
           {this.props.question.kanji}
         </div>
-        <ul>
           {answers}
-        </ul>
       </div>
     );
   }
 }
 
 class Answer extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { isToggleOn: true };
+    this.handleClick = this.handleClick.bind(this);
+  }
+
   handleClick() {
-    console.log('clicked')
+    this.props.onAnswerSelected(this.props.answer.english);
   }
 
   render() {

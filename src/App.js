@@ -64,7 +64,7 @@ class App extends Component {
 class Question extends Component {
   constructor(props) {
     super(props);
-    this.state = { isToggleOn: true, questionClass: 'Neutral' , showNext: false };
+    this.state = { questionClass: 'Neutral' , showNext: false };
     this.handleAnswerSelected = this.handleAnswerSelected.bind(this);
     this.handleNextQuestion = this.handleNextQuestion.bind(this);
   }
@@ -109,7 +109,6 @@ class Question extends Component {
 class Answer extends Component {
   constructor(props) {
     super(props);
-    this.state = { isToggleOn: true };
     this.handleClick = this.handleClick.bind(this);
   }
 

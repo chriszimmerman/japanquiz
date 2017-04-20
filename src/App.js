@@ -29,17 +29,28 @@ var data = [
   }
 ];
 
-class App extends Component {
-  render() {
-
+function newQuestion(){
     var shuffled = _.shuffle(data);
     var answers = _.first(shuffled, 4);
     
     var question = answers[Math.floor(Math.random() * answers.length)];
 
+    return {
+      answers: answers,
+      question: question
+    };
+}
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = newQuestion();
+  }
+
+  render() {
     return (
       <div className="App">
-        <Question question={question} answers={answers} />
+        <Question question={this.state.question} answers={this.state.answers} />
       </div>
     );
   }
@@ -48,17 +59,22 @@ class App extends Component {
 class Question extends Component {
   constructor(props) {
     super(props);
-    this.state = { isToggleOn: true, questionClass: 'Neutral' };
+    this.state = { isToggleOn: true, questionClass: 'Neutral' , showNext: false };
     this.handleAnswerSelected = this.handleAnswerSelected.bind(this);
+    this.handleNextQuestion = this.handleNextQuestion.bind(this);
   }
 
   handleAnswerSelected(answer) {
     if(answer === this.props.question.english){
-      this.setState({ questionClass: 'Correct' })
+      this.setState({ questionClass: 'Correct', showNext: true })
     }
     else {
-      this.setState({ questionClass: 'Incorrect' })
+      this.setState({ questionClass: 'Incorrect', showNext: false })
     }
+  }
+
+  handleNextQuestion() {
+    console.log('going to next question');
   }
 
   render() {
@@ -71,6 +87,14 @@ class Question extends Component {
           {this.props.question.kanji}
         </div>
           {answers}
+      { this.state.showNext ? (
+          <div>
+            <div onClick={this.handleNextQuestion} className="Answer">
+              Next Question
+            </div>
+          </div>
+          ) : <span/>
+      }
       </div>
     );
   }

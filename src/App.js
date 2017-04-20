@@ -30,8 +30,9 @@ var data = [
 ];
 
 function newQuestion(){
+    const NUMBER_OF_ANSWERS = 4;
     var shuffled = _.shuffle(data);
-    var answers = _.first(shuffled, 4);
+    var answers = _.first(shuffled, NUMBER_OF_ANSWERS);
     
     var question = answers[Math.floor(Math.random() * answers.length)];
 

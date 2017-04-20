@@ -44,13 +44,18 @@ function newQuestion(){
 class App extends Component {
   constructor(props) {
     super(props);
+    this.handleNextQuestion = this.handleNextQuestion.bind(this);
     this.state = newQuestion();
+  }
+
+  handleNextQuestion() {
+    this.setState(newQuestion());
   }
 
   render() {
     return (
       <div className="App">
-        <Question question={this.state.question} answers={this.state.answers} />
+        <Question onNextQuestion={this.handleNextQuestion} question={this.state.question} answers={this.state.answers} />
       </div>
     );
   }
@@ -74,7 +79,8 @@ class Question extends Component {
   }
 
   handleNextQuestion() {
-    console.log('going to next question');
+    this.setState({questionClass: 'Neutral', showNext: false });
+    this.props.onNextQuestion();
   }
 
   render() {

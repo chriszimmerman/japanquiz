@@ -2,32 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import _ from 'underscore';
 
-var data = [
-  {
-    kanji: '花',
-    hiragana: 'はな',
-    romaji: 'hana',
-    english: 'flower'
-  },
-  {
-    kanji: '本',
-    hiragana: 'ほん',
-    romaji: 'hon',
-    english: 'book'
-  },
-  {
-    kanji: '日',
-    hiragana: 'にち',
-    romaji: 'nichi',
-    english: 'day'
-  },
-  {
-    kanji: '歌',
-    hiragana: 'うた',
-    romaji: 'uta',
-    english: 'song'
-  }
-];
+var data = require('../data/level5.json');
 
 function newQuestion(){
     const NUMBER_OF_ANSWERS = 4;
@@ -85,13 +60,17 @@ class Question extends Component {
   }
 
   render() {
+    function getQuestionDisplayText(question) {
+      return question.kanji !== "" ? question.kanji : question.kana 
+    }
+
     var answers = this.props.answers.map((answer, i) =>
       <Answer onAnswerSelected={this.handleAnswerSelected} key={i} answer={answer} />
     );
     return (
       <div className={"Quiz-header " + this.state.questionClass}>
         <div className="Question">
-          {this.props.question.kanji}
+          {getQuestionDisplayText(this.props.question)}
         </div>
           {answers}
       { this.state.showNext ? (

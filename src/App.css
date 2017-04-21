@@ -1,15 +1,23 @@
+/*TODO: Make size of quesiton more dynamic so that it doesn't spill below header on mobile */
+
 .App {
   text-align: center;
 }
 
 .Answer {
   background-color: #F52;
-  height: 15px;
+  height: 55px;
+  line-height: 55px;
   width: 150px;
   color: white;
-  padding: 20px;
   margin: 10px 5px 5px 10px;
   display: inline-block;
+}
+
+.AnswerText {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
 }
 
 .Answer:hover {

@@ -99,7 +99,7 @@ class Answer extends Component {
   render() {
     return (
       <div onClick={this.handleClick} className="Answer">
-        {this.props.answer.english}
+        <span className="AnswerText">{this.props.answer.english}</span>
       </div>
     );
   }

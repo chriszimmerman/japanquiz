@@ -1,33 +1,36 @@
-/*TODO: Make size of quesiton more dynamic so that it doesn't spill below header on mobile */
-
 .App {
   text-align: center;
 }
 
-.Answer {
-  background-color: #F52;
-  height: 55px;
-  line-height: 55px;
-  width: 150px;
+.Quiz-header {
   color: white;
-  margin: 10px 5px 5px 10px;
-  display: inline-block;
 }
 
-.AnswerText {
-  display: inline-block;
-  vertical-align: middle;
-  line-height: normal;
+.Question {
+  font-size: 15vw;
+  height: 15vw;
+}
+
+.Answer {
+  background-color: #F52;
+  height: 10vh;
+  line-height: 10vh;
+  width: 90vw;
+  color: white;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 10px;
 }
 
 .Answer:hover {
   background-color: #00F;
 }
 
-.Quiz-header {
-  height: 100px;
-  color: white;
-  padding: 10px;
+.AnswerText {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+  font-size: 3vh;
 }
 
 .Neutral {
@@ -40,8 +43,4 @@
 
 .Incorrect {
   background-color: #F00;
-}
-
-.Question {
-  font-size: 72pt;
 }

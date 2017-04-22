@@ -30,9 +30,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <Question onNextQuestion={this.handleNextQuestion} question={this.state.question} answers={this.state.answers} />
-      </div>
+      <Question onNextQuestion={this.handleNextQuestion} question={this.state.question} answers={this.state.answers} />
     );
   }
 }
@@ -68,15 +66,17 @@ class Question extends Component {
       <Answer onAnswerSelected={this.handleAnswerSelected} key={i} answer={answer} />
     );
     return (
-      <div className={"Quiz-header " + this.state.questionClass}>
-        <div className="Question">
-          {getQuestionDisplayText(this.props.question)}
+      <div className="App">
+        <div className={"Quiz-header " + this.state.questionClass}>
+          <div className="Question">
+            {getQuestionDisplayText(this.props.question)}
+          </div>
         </div>
           {answers}
       { this.state.showNext ? (
           <div>
             <div onClick={this.handleNextQuestion} className="Answer">
-              Next Question
+              <span className="AnswerText">Next Question</span>
             </div>
           </div>
           ) : <span/>

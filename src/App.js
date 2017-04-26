@@ -2,10 +2,78 @@ import React, { Component } from 'react';
 import './App.css';
 import _ from 'underscore';
 
-var data = require('../data/level5.json');
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {takingQuiz: false};
+    this.startQuiz = this.startQuiz.bind(this);
+  }
 
-function newQuestion(){
+  startQuiz(level) {
+    this.setState({takingQuiz: true, level: level})
+  }
+
+  render() {
+    return (
+       this.state.takingQuiz ? <Quiz level={this.state.level} /> : <LevelSelector startQuiz={this.startQuiz} />
+    );
+  }
+}
+
+class LevelSelector extends Component {
+  constructor(props) {
+    super(props);
+    this.onLevelSelected = this.onLevelSelected.bind(this);
+  }
+
+  onLevelSelected(level) {
+    this.props.startQuiz(level);
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <h1>Welcome to the Japanese quiz! Select your level:</h1>
+        <Level onLevelSelected={this.onLevelSelected} level={5} />
+        <Level onLevelSelected={this.onLevelSelected} level={4} />
+        <Level onLevelSelected={this.onLevelSelected} level={3} />
+        <Level onLevelSelected={this.onLevelSelected} level={2} />
+        <Level onLevelSelected={this.onLevelSelected} level={1} />
+      </div>
+    );
+  }
+}
+
+class Level extends Component {
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.props.onLevelSelected(this.props.level);
+  }
+
+  render() {
+    return (
+      <div onClick={this.handleClick} className="Answer">
+        <span className="AnswerText">N{this.props.level}</span>
+      </div>
+    );
+  }
+}
+
+class Quiz extends Component {
+  constructor(props) {
+    super(props);
+    this.handleNextQuestion = this.handleNextQuestion.bind(this);
+    this.newQuestion = this.newQuestion.bind(this);
+    this.state = this.newQuestion();
+  }
+
+  newQuestion() {
     const NUMBER_OF_ANSWERS = 4;
+    var data = require('../data/level' + this.props.level + '.json');
     var shuffled = _.shuffle(data);
     var answers = _.first(shuffled, NUMBER_OF_ANSWERS);
     
@@ -15,17 +83,10 @@ function newQuestion(){
       answers: answers,
       question: question
     };
-}
-
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.handleNextQuestion = this.handleNextQuestion.bind(this);
-    this.state = newQuestion();
   }
 
   handleNextQuestion() {
-    this.setState(newQuestion());
+    this.setState(this.newQuestion());
   }
 
   render() {
